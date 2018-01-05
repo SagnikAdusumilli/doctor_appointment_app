@@ -10,20 +10,20 @@ import { AuthService } from './auth.service';
     templateUrl: './signin.component.html'
 })
 export class SigninComponent {
-    myForm: FormGroup;
+    public myForm: FormGroup;
 
     constructor(private authService: AuthService, private router: Router) {}
 
-    onSubmit() {
+    public onSubmit() {
         const user = new User(this.myForm.value.email, this.myForm.value.password);
         this.authService.signin(user)
             .subscribe(
-                data => {
+                (data) => {
                     localStorage.setItem('token', data.token);
                     localStorage.setItem('userId', data.userId);
                     this.router.navigateByUrl('/');
                 },
-                error => console.error(error)
+                (error) => console.error(error)
             );
         this.myForm.reset();
     }
