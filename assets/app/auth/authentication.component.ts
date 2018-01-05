@@ -21,7 +21,7 @@ import { AuthService } from "./auth.service";
 export class AuthenticationComponent {
     constructor(private authService: AuthService) {}
 
-    isLoggedIn() {
+    public isLoggedIn() {
         return this.authService.isLoggedIn();
     }
 }

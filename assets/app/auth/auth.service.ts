@@ -1,19 +1,19 @@
-import { Injectable } from "@angular/core";
-import { Http, Headers, Response } from "@angular/http";
+import { Injectable } from '@angular/core';
+import { Http, Headers, Response } from '@angular/http';
 import 'rxjs/Rx';
-import { Observable } from "rxjs";
+import { Observable } from 'rxjs';
 
-import { User } from "./user.model";
-import { ErrorService } from "../errors/error.service";
+import { User } from './user.model';
+import { ErrorService } from '../errors/error.service';
 
 @Injectable()
 export class AuthService {
     constructor(private http: Http, private errorService: ErrorService) {}
 
-    signup(user: User) {
+    public signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://riju-message-app.herokuapp.com/user', body, {headers: headers})
+        return this.http.post('http://riju-message-app.herokuapp.com/user', body, {headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -21,10 +21,10 @@ export class AuthService {
             });
     }
 
-    signin(user: User) {
+    public signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://riju-message-app.herokuapp.com/user/signin', body, {headers: headers})
+        return this.http.post('http://riju-message-app.herokuapp.com/user/signin', body, {headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -32,11 +32,11 @@ export class AuthService {
             });
     }
 
-    logout() {
+    public logout() {
         localStorage.clear();
     }
 
-    isLoggedIn() {
+    public isLoggedIn() {
         return localStorage.getItem('token') !== null;
     }
 }
