@@ -20,7 +20,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.post('http://riju-message-app.herokuapp.com/message' + token, body, {headers})
+        return this.http.post('http://message-app-2.herokuapp.com/message' + token, body, {headers})
             .map((response: Response) => {
                 const result = response.json();
                 const msg = new Message(
@@ -38,7 +38,7 @@ export class MessageService {
     }
 
     public getMessages() {
-        return this.http.get('http://riju-message-app.herokuapp.com/message')
+        return this.http.get('http://message-app-2.herokuapp.com/message')
             .map((response: Response) => {
                 const messages = response.json().obj;
                 const transformedMessages: Message[] = [];
@@ -69,7 +69,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.patch('http://riju-message-app.herokuapp.com/message/' + message.messageId + token, body, {headers})
+        return this.http.patch('http://message-app-2.herokuapp.com/message/' + message.messageId + token, body, {headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -82,7 +82,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.delete('http://riju-message-app.herokuapp.com/message/' + message.messageId + token)
+        return this.http.delete('http://message-app-2.herokuapp.com/message/' + message.messageId + token)
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
