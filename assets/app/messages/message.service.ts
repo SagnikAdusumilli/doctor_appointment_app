@@ -10,6 +10,8 @@ import { ErrorService } from '../errors/error.service';
 export class MessageService {
     public messageIsEdit = new EventEmitter<Message>();
     private messages: Message[] = [];
+    // private BE_URL = 'http://localhost:3000/';
+    private BE_URL = ' http://message-app-2.herokuapp.com/';
 
     constructor(private http: Http, private errorService: ErrorService) {
     }
@@ -20,7 +22,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.post('http://message-app-2.herokuapp.com/message' + token, body, {headers})
+        return this.http.post(this.BE_URL + 'message' + token, body, {headers})
             .map((response: Response) => {
                 const result = response.json();
                 const msg = new Message(
@@ -38,7 +40,7 @@ export class MessageService {
     }
 
     public getMessages() {
-        return this.http.get('http://message-app-2.herokuapp.com/message')
+        return this.http.get(this.BE_URL + 'message')
             .map((response: Response) => {
                 const messages = response.json().obj;
                 const transformedMessages: Message[] = [];
@@ -69,7 +71,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.patch('http://message-app-2.herokuapp.com/message/' + message.messageId + token, body, {headers})
+        return this.http.patch(this.BE_URL + 'message'  + message.messageId + token, body, {headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -82,7 +84,7 @@ export class MessageService {
         const token = localStorage.getItem('token')
             ? '?token=' + localStorage.getItem('token')
             : '';
-        return this.http.delete('http://message-app-2.herokuapp.com/message/' + message.messageId + token)
+        return this.http.delete(this.BE_URL + 'message' + message.messageId + token)
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());

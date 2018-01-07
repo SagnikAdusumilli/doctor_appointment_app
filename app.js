@@ -12,6 +12,7 @@ var userRoutes = require('./routes/user');
 
 var app = express();
 mongoose.connect('user:password@ds237967.mlab.com:37967/riju-message-app');
+// mongoose.connect('localhost:27017/riju-message-app');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

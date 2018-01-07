@@ -8,12 +8,14 @@ import { ErrorService } from '../errors/error.service';
 
 @Injectable()
 export class AuthService {
+    // private BE_URL = 'http://localhost:3000/';
+    private BE_URL = ' http://message-app-2.herokuapp.com/';
     constructor(private http: Http, private errorService: ErrorService) {}
 
     public signup(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://message-app-2.herokuapp.com/user', body, {headers})
+        return this.http.post(this.BE_URL + 'user', body, {headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
@@ -24,7 +26,7 @@ export class AuthService {
     public signin(user: User) {
         const body = JSON.stringify(user);
         const headers = new Headers({'Content-Type': 'application/json'});
-        return this.http.post('http://message-app-2.herokuapp.com/user/signin', body, {headers})
+        return this.http.post(this.BE_URL + 'user/signin', body, {headers})
             .map((response: Response) => response.json())
             .catch((error: Response) => {
                 this.errorService.handleError(error.json());
