@@ -9,7 +9,7 @@ import { ErrorService } from '../errors/error.service';
 @Injectable()
 export class AuthService {
     // private BE_URL = 'http://localhost:3000/';
-    private BE_URL = ' http://message-app-2.herokuapp.com/';
+    private BE_URL = 'https://message-app-2.herokuapp.com/';
     constructor(private http: Http, private errorService: ErrorService) {}
 
     public signup(user: User) {
